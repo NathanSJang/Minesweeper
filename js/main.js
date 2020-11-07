@@ -20,8 +20,14 @@ document.getElementById('replay')
 init();
 
 function handleClick(e) {
-  if (e.target.classList.contains('bomb')) {
-    console.log('Game over')
+  const box = Array.from(boxEl);
+  const index = box.indexOf(e.target);
+  console.log(index);
+  
+  if (boxEl[index].classList.contains('bomb')) {
+    console.log('Game over');
+  } if(boxEl[index].classList.contains('good')) {
+    console.log('good');
   }
 }
 
@@ -32,18 +38,19 @@ function placeBomb() {
   let gameArray = goodArray.concat(bombArray);
   let shuffle = gameArray.sort(() => Math.random() - 0.5);
 
-  for(let i = boxEl.length - 1; i >= 0; i--){
+  for(let i =0 ; i < boxEl.length - 1; i++){
     let box = boxEl[i]
     box.setAttribute('class', shuffle[i]);
     }
 }
 
-// function countNearBomb() {
-//   for(let i =0; i < boxEl.length; i++) {
-//     console,log(i);
+function countNearBomb() {
+  for(let i =0; i < boxEl.length; i++) {
+    let countNum =0;
 
-//   }
-// }
+
+  }
+}
 
 
 
