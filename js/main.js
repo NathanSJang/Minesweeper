@@ -12,10 +12,18 @@ const boxEl = document.querySelectorAll('.board > div');
 
 
 /*----- event listeners -----*/
+boxEl.forEach(box => {box.addEventListener('click', handleClick)})
 
-
+document.getElementById('replay')
+  .addEventListener('click', init);
 /*----- functions -----*/
 init();
+
+function handleClick(e) {
+  if (e.target.classList.contains('bomb')) {
+    console.log('Game over')
+  }
+}
 
 function placeBomb() {
   let leng = boxEl.length 
@@ -27,16 +35,15 @@ function placeBomb() {
   for(let i = boxEl.length - 1; i >= 0; i--){
     let box = boxEl[i]
     box.setAttribute('class', shuffle[i]);
-    console.log(box);
     }
 }
 
-function countnearbomb() {
-  for(let i =0; i < boxEl.length; i++) {
-    console,log(i);
+// function countNearBomb() {
+//   for(let i =0; i < boxEl.length; i++) {
+//     console,log(i);
 
-  }
-}
+//   }
+// }
 
 
 
