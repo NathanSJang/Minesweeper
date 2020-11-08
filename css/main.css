@@ -89,3 +89,7 @@ section {
   background-color: var(--bg-dark);
   color: var(--font-bg);
 }
+
+.check {
+  background-color: white;
+}
