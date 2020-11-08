@@ -16,6 +16,7 @@ boxEl.forEach(box => {box.addEventListener('click', handleClick)})
 
 document.getElementById('replay')
   .addEventListener('click', init);
+
 /*----- functions -----*/
 init();
 
@@ -24,8 +25,8 @@ function handleClick(e) {
   const index = box.indexOf(e.target);
   const clickedBox = boxEl[index]
   
-  if(gameStatus) return
-  if(clickedBox.classList.contains('check')) return
+  if(gameStatus) return;
+  if(clickedBox.classList.contains('check')) return;
   
   if (clickedBox.classList.contains('bomb')) {
     console.log('Game over');
@@ -38,7 +39,7 @@ function handleClick(e) {
       clickedBox.innerHTML = num;
       return;
     }
-    clickedBox.classList.add('check')
+    clickedBox.classList.add('check');
   }
 }
 
@@ -71,13 +72,16 @@ function countNum() {
     if ( i < 41 && !rightBox && boxEl[i + 1 + width].classList.contains('bomb') ) countNum++;//bottom
     if ( i < 40 && boxEl[i + width].classList.contains('bomb')) countNum ++;// bottom
     boxEl[i].setAttribute('data', countNum);
-  } }
+  } 
+}
 
-// function showNum(box) {
-//   let num = box.getAttribute('data');
-//   box.classList.add('checked')
-//   box.innerHTML = num;
-// }
+function checkNearBox() {
+  const leftBOX = ( i % width === 0);
+  const rightBox = (i % width === -1);
+  const 
+
+}
+
 
 function render() {
 
@@ -87,6 +91,7 @@ function render() {
 function init() {
   bombs = 10;
   width = 7;
+  gameStatus = false;
 
   render();
 }
