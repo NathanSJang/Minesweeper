@@ -88,54 +88,43 @@ function countNum() {
 function checkNearBox(box, index) {
   const leftBox = (index % width === 0);
   const rightBox = (index %width === (width - 1));
-  
+
+  const checkNum = function(el) {
+    let num = el.getAttribute('data');
+    el.innerHTML = num;
+    return el.classList.add('check');
+  }
   if (index > 0 && !leftBox) {
-    const newTarget = boxEl[index - 1].id
-    console.log(newTarget);
-    const newBox = document.getElementById(newTarget);
-    newBox.classList.add('check')
+    const newTarget = boxEl[index - 1]
+    checkNum;
   }
   if (index > 6 && !rightBox) {
-    const newTarget = boxEl[index + 1 -width].id
-    console.log(newTarget);
-    const newBox = document.getElementById(newTarget);
-    newBox.classList.add('check')
+    const newTarget = boxEl[index + 1 -width]
+    checkNum;
   }
   if (index > 7) {
-    const newTarget = boxEl[index - width].id
-    console.log(newTarget)
-    const newBox = document.getElementById(newTarget);
-    newBox.classList.add('check')
+    const newTarget = boxEl[index - width]
+    checkNum;
   }
   if (index > 8 && !leftBox) {
-    const newTarget = boxEl[index - 1 - width].id
-    console.log(newTarget)
-    const newBox = document.getElementById(newTarget);
-    newBox.classList.add('check')
+    const newTarget = boxEl[index - 1 - width]
+    checkNum;
   }
   if (index < 48 && !rightBox) {
-    const newTarget = boxEl[index + 1].id
-    console.log(newTarget)
-    const newBox = document.getElementById(newTarget);
-    newBox.classList.add('check')
+    const newTarget = boxEl[index + 1]
+    checkNum;
   }
   if (index < 42 && !leftBox) {
-    const newTarget = boxEl[index - 1 + width].id
-    console.log(newTarget)
-    const newBox = document.getElementById(newTarget);
-    newBox.classList.add('check')
+    const newTarget = boxEl[index - 1 + width]
+    checkNum;
   }
   if (index < 41 && !rightBox) {
-    const newTarget = boxEl[index + 1 + width].id
-    console.log(newTarget)
-    const newBox = document.getElementById(newTarget);
-    newBox.classList.add('check')
+    const newTarget = boxEl[index + 1 + width]
+    checkNum;
   }
   if (index < 40 && !rightBox) {
-    const newTarget = boxEl[index + width].id
-    console.log(newTarget)
-    const newBox = document.getElementById(newTarget);
-    newBox.classList.add('check')
+    const newTarget = boxEl[index + width]
+    checkNum;
   }
 }
 
