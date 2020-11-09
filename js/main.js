@@ -69,7 +69,7 @@ function countNum() {
     let countNum =0;
 
     const leftBOX = (i % width === 0);
-    const rightBox = (i % width === -1);
+    const rightBox = (i % width === (width - 1));
       
     if ( i > 0 && !leftBOX && boxEl[i - 1].classList.contains('bomb') ) countNum++; //left
     if ( i > 6 && !rightBox && boxEl[i + 1 - width].classList.contains('bomb') ) countNum++; // top-right
@@ -85,7 +85,7 @@ function countNum() {
 
 function checkNearBox(box, index) {
   const leftBox = (index % width === 0);
-  const rightBox = (index % width === -1);
+  const rightBox = (index %width === (width - 1));
   
   if (index > 0 && !leftBox) {
     const newTarget = boxEl[index - 1].id
