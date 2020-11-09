@@ -10,7 +10,7 @@ let width;
 const board = document.querySelector('.board');
 const boxEl = document.querySelectorAll('.board > div');
 const msgEl = document.getElementById('msg');
-
+const boxInnerText = boxEl.forEach(box => {box.innerText = ''})
 /*----- event listeners -----*/
 boxEl.forEach(box => {box.addEventListener('click', handleClick)})
 
@@ -23,9 +23,7 @@ init();
 function handleClick(e) {
   const box = Array.from(boxEl);
   const index = box.indexOf(e.target);
-  const clickedBox = boxEl[index]
-  const currentId = clickedBox.id;
-  // console.log(clickedBox);
+  const clickedBox = boxEl[index];
   
   if(gameStatus) return;
   if(clickedBox.classList.contains('check')) return;
@@ -39,11 +37,16 @@ function handleClick(e) {
     if (num != 0) {
       clickedBox.classList.add('check');
       clickedBox.innerHTML = num;
+    } 
+    if(num == 0) {
+      clickedBox.classList.add('check');
+      checkNearBox(box, index);
     }
+
   return clickedBox.classList.add('check'); 
   }
-  gameStatus = winMine();
 
+  gameStatus = winMine();
   render();
 }
 
@@ -80,51 +83,60 @@ function countNum() {
   } 
 }
 
-function checkNearBox(clickedBox, currentId) {
-  const leftBOX = ( currentId % width === 0);
-  const rightBox = (currentId % width === -1);
-
-  if (currentId > 0 && !leftBOX) {
-    const newId = clickedBox[currentId -1].id;
-    const newBox = document.getElementById(newId);
-    countNum(newBox);
+function checkNearBox(box, index) {
+  const leftBox = (index % width === 0);
+  const rightBox = (index % width === -1);
+  
+  if (index > 0 && !leftBox) {
+    const newTarget = boxEl[index - 1].id
+    console.log(newTarget);
+    const newBox = document.getElementById(newTarget);
+    newBox.classList.add('check')
   }
-  if (currentId > 6 && !rightBox) {
-    const newId = clickedBox[currentId +1 - width]
-    const newBox = document.getElementById(newId);
-    countNum(newBox);
+  if (index > 6 && !rightBox) {
+    const newTarget = boxEl[index + 1 -width].id
+    console.log(newTarget);
+    const newBox = document.getElementById(newTarget);
+    newBox.classList.add('check')
   }
-  if (currentId > 7) {
-    const newId = clickedBox[currentId - width]
-    const newBox = document.getElementById(newId);
-    countNum(newBox);
+  if (index > 7) {
+    const newTarget = boxEl[index - width].id
+    console.log(newTarget)
+    const newBox = document.getElementById(newTarget);
+    newBox.classList.add('check')
   }
-  if (currentId > 8 && !leftBox) {
-    const newId = clickedBox[currentId -1 - width]
-    const newBox = document.getElementById(newId);
-    countNum(newBox);
+  if (index > 8 && !leftBox) {
+    const newTarget = boxEl[index - 1 - width].id
+    console.log(newTarget)
+    const newBox = document.getElementById(newTarget);
+    newBox.classList.add('check')
   }
-  if (currentId > 48 && !rightBox) {
-    const newId = clickedBox[currentId +1]
-    const newBox = document.getElementById(newId);
-    countNum(newBox);
+  if (index > 48 && !rightBox) {
+    const newTarget = boxEl[index + 1].id
+    console.log(newTarget)
+    const newBox = document.getElementById(newTarget);
+    newBox.classList.add('check')
   }
-  if (currentId > 42 && !leftBox) {
-    const newId = clickedBox[currentId -1 +width]
-    const newBox = document.getElementById(newId);
-    countNum(newBox);
+  if (index > 42 && !leftBox) {
+    const newTarget = boxEl[index - 1 + width].id
+    console.log(newTarget)
+    const newBox = document.getElementById(newTarget);
+    newBox.classList.add('check')
   }
-  if (currentId > 41) {
-    const newId = clickedBox[currentId +1 +width]
-    const newBox = document.getElementById(newId);
-    countNum(newBox);
+  if (index > 41 && !rightBox) {
+    const newTarget = boxEl[index + 1 + width].id
+    console.log(newTarget)
+    const newBox = document.getElementById(newTarget);
+    newBox.classList.add('check')
   }
-  if (currentId > 40 && !rightBox) {
-    const newId = clickedBox[currentId + width]
-    const newBox = document.getElementById(newId);
-    countNum(newBox);
+  if (index > 40 && !rightBox) {
+    const newTarget = boxEl[index + width].id
+    console.log(newTarget)
+    const newBox = document.getElementById(newTarget);
+    newBox.classList.add('check')
   }
 }
+
 
 function winMine() {
   if(bombs === 0) gameStatus === true;
@@ -150,6 +162,6 @@ function init() {
   bombs = 10;
   width = 7;
   gameStatus = null;
-
+  boxInnerText;
   render();
 }
