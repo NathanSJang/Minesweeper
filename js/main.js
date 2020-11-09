@@ -10,7 +10,9 @@ let width;
 const board = document.querySelector('.board');
 const boxEl = document.querySelectorAll('.board > div');
 const msgEl = document.getElementById('msg');
-const boxInnerText = boxEl.forEach(box => {box.innerText = ''})
+const boxData = boxEl.forEach(box => {box.setAttribute('data', '0')});
+const boxText = boxEl.forEach(box => box.innerText = '');
+
 /*----- event listeners -----*/
 boxEl.forEach(box => {box.addEventListener('click', handleClick)})
 
@@ -37,8 +39,7 @@ function handleClick(e) {
     if (num != 0) {
       clickedBox.classList.add('check');
       clickedBox.innerHTML = num;
-    } 
-    if(num == 0) {
+    } else {
       clickedBox.classList.add('check');
       checkNearBox(box, index);
     }
@@ -111,25 +112,25 @@ function checkNearBox(box, index) {
     const newBox = document.getElementById(newTarget);
     newBox.classList.add('check')
   }
-  if (index > 48 && !rightBox) {
+  if (index < 48 && !rightBox) {
     const newTarget = boxEl[index + 1].id
     console.log(newTarget)
     const newBox = document.getElementById(newTarget);
     newBox.classList.add('check')
   }
-  if (index > 42 && !leftBox) {
+  if (index < 42 && !leftBox) {
     const newTarget = boxEl[index - 1 + width].id
     console.log(newTarget)
     const newBox = document.getElementById(newTarget);
     newBox.classList.add('check')
   }
-  if (index > 41 && !rightBox) {
+  if (index < 41 && !rightBox) {
     const newTarget = boxEl[index + 1 + width].id
     console.log(newTarget)
     const newBox = document.getElementById(newTarget);
     newBox.classList.add('check')
   }
-  if (index > 40 && !rightBox) {
+  if (index < 40 && !rightBox) {
     const newTarget = boxEl[index + width].id
     console.log(newTarget)
     const newBox = document.getElementById(newTarget);
@@ -142,13 +143,18 @@ function winMine() {
   if(bombs === 0) gameStatus === true;
 }
 
+function clearBoard() {
+  boxEl.forEach(box => {box.setAttribute('data', '0')});
+  boxEl.forEach(box => box.innerText = '');
+}
+
 function renderMessage() {
   if (gameStatus === null) {
     msgEl.textContent = `Let's Find the Bomb!`
   } else if (gameStatus) {
-    msgEl.textContent = `You win`
+    return msgEl.textContent = `You win`
   } else {
-    msgEl.textContent = `You Lose`;
+    return msgEl.textContent = `You Lose`;
   }
 }
 
@@ -162,6 +168,7 @@ function init() {
   bombs = 10;
   width = 7;
   gameStatus = null;
-  boxInnerText;
+
+  clearBoard();
   render();
 }
