@@ -39,9 +39,10 @@ function handleClick(e) {
     if (num != 0) {
       clickedBox.classList.add('check');
       clickedBox.innerHTML = num;
-    } else {
-      clickedBox.classList.add('check');
-      checkNearBox(box, index);
+    } 
+    if(num == 0) {
+      clickedBox.classList.add('check')
+      handleClick(checkNearBox(box, index));
     }
 
   return clickedBox.classList.add('check'); 
