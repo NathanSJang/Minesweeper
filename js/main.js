@@ -15,12 +15,18 @@ const boxText = boxEl.forEach(box => box.innerText = '');
 
 /*----- event listeners -----*/
 boxEl.forEach(box => {box.addEventListener('click', handleClick)})
+boxEl.forEach(box => {box.addEventListener('contextmenu', rightClick)})
 
 document.getElementById('replay')
   .addEventListener('click', init);
 
 /*----- functions -----*/
 init();
+
+function rightClick(e) {
+  e.preventDefault();
+  
+}
 
 function handleClick(e) {
   const box = Array.from(boxEl);
@@ -48,7 +54,7 @@ function handleClick(e) {
     return clickedBox.classList.add('check');
   } 
   
-  gameStatus = winMine();
+  gameStatus = gameOver();
   render();
 }
 
@@ -129,8 +135,14 @@ function checkNearBox(box, index) {
 }
 
 
-function winMine() {
-  if(bombs === 0) gameStatus === true;
+function gameOver() {
+  gameStatus = false;
+  boxEl.forEach(box => {
+    if (box.classList.contains('bomb')) {
+      
+      box.style.backgroundImage = 'url(image/bomb.png)'
+    }
+  })
 }
 
 function clearBoard() {

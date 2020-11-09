@@ -50,6 +50,8 @@ section {
 .board > div {
   height: 70px;
   width: 70px;
+  background-image: center;
+  background-position: center;
 }
 
 .bomb {
