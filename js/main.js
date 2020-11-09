@@ -89,42 +89,42 @@ function checkNearBox(box, index) {
   const leftBox = (index % width === 0);
   const rightBox = (index %width === (width - 1));
 
-  const checkNum = function(el) {
+  function checkNum(el) {
     let num = el.getAttribute('data');
     el.innerHTML = num;
     return el.classList.add('check');
   }
   if (index > 0 && !leftBox) {
     const newTarget = boxEl[index - 1]
-    checkNum;
+    checkNum(newTarget);
   }
   if (index > 6 && !rightBox) {
     const newTarget = boxEl[index + 1 -width]
-    checkNum;
+    checkNum(newTarget);
   }
   if (index > 7) {
     const newTarget = boxEl[index - width]
-    checkNum;
+    checkNum(newTarget);
   }
   if (index > 8 && !leftBox) {
     const newTarget = boxEl[index - 1 - width]
-    checkNum;
+    checkNum(newTarget);
   }
   if (index < 48 && !rightBox) {
     const newTarget = boxEl[index + 1]
-    checkNum;
+    checkNum(newTarget);
   }
   if (index < 42 && !leftBox) {
     const newTarget = boxEl[index - 1 + width]
-    checkNum;
+    checkNum(newTarget);
   }
   if (index < 41 && !rightBox) {
     const newTarget = boxEl[index + 1 + width]
-    checkNum;
+    checkNum(newTarget);
   }
   if (index < 40 && !rightBox) {
     const newTarget = boxEl[index + width]
-    checkNum;
+    checkNum(newTarget);
   }
 }
 
