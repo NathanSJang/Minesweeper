@@ -5,6 +5,7 @@
 let bombs; // bomb#
 let gameStatus;//win or gameover;
 let width;
+let flag;
 
 /*----- cached element references -----*/
 const board = document.querySelector('.board');
@@ -21,10 +22,15 @@ document.getElementById('replay')
 /*----- functions -----*/
 init();
 
-// function rightClick(e) {
-//   e.preventDefault();
+function rightClick(e) {
+  e.preventDefault();
+
+  const box = Array.from(boxEl);
+  const index = box.indexOf(e.target);
+  const clickedBox = boxEl[index];
+  mayBeBomb(clickedBox);
   
-// }
+}
 
 function handleClick(e) {
   const box = Array.from(boxEl);
@@ -58,7 +64,6 @@ function handleClick(e) {
 
 
 function placeBomb() {
-  if(gameStatus === false) return
   let leng = boxEl.length 
   let bombArray = Array(bombs).fill('bomb');
   let goodArray = Array(leng- bombs).fill('good');
@@ -134,6 +139,21 @@ function checkNearBox(box, index) {
   }
 }
 
+function mayBeBomb(clickedBox) {
+  console.log(clickedBox)
+  console.log('flag');
+  if (!clickedBox.classList.contains('check') && (flag < bombs)) {
+    if (!clickedBox.classList.contains('flag')) {
+      clickedBox.classList.add('flag')
+      clickedBox.innerHTML = '🏳️‍🌈'
+      flag ++
+    } else {
+      clickedBox.classList.remove('flag')
+      clickedBox.innerHTML = ''
+      flag --
+    }
+  }
+}
 
 function gameOver() {
   gameStatus = false;
@@ -171,6 +191,7 @@ function init() {
   bombs = 10;
   width = 7;
   gameStatus = null;
+  flag = 0;
 
   placeBomb();
   clearBoard();
