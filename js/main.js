@@ -32,11 +32,11 @@ function handleClick(e) {
   const box = Array.from(boxEl);
   const index = box.indexOf(e.target);
   const clickedBox = boxEl[index];
-  // console.log(typeof box);
+
   console.log(index);
 
-  if(gameStatus) return;
-  // if(boxEl[index].classList.contains('check')) return;
+  if(!gameStatus) return;
+  if(boxEl[index].classList.contains('check')) return;
   
   if (clickedBox.classList.contains('bomb')) {
     gameStatus = false;
@@ -137,9 +137,9 @@ function checkNearBox(box, index) {
 
 function gameOver() {
   gameStatus = false;
+
   boxEl.forEach(box => {
     if (box.classList.contains('bomb')) {
-      
       box.style.backgroundImage = 'url(image/bomb.png)'
     }
   })
