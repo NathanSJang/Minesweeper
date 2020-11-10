@@ -10,12 +10,10 @@ let width;
 const board = document.querySelector('.board');
 const boxEl = document.querySelectorAll('.board > div');
 const msgEl = document.getElementById('msg');
-const boxData = boxEl.forEach(box => {box.setAttribute('data', '0')});
-const boxText = boxEl.forEach(box => box.innerText = '');
 
 /*----- event listeners -----*/
 boxEl.forEach(box => {box.addEventListener('click', handleClick)})
-boxEl.forEach(box => {box.addEventListener('contextmenu', rightClick)})
+// boxEl.forEach(box => {box.addEventListener('contextmenu', rightClick)})
 
 document.getElementById('replay')
   .addEventListener('click', init);
@@ -23,10 +21,10 @@ document.getElementById('replay')
 /*----- functions -----*/
 init();
 
-function rightClick(e) {
-  e.preventDefault();
+// function rightClick(e) {
+//   e.preventDefault();
   
-}
+// }
 
 function handleClick(e) {
   const box = Array.from(boxEl);
@@ -35,7 +33,7 @@ function handleClick(e) {
 
   console.log(index);
 
-  if(!gameStatus) return;
+  if(gameStatus) return;
   if(boxEl[index].classList.contains('check')) return;
   
   if (clickedBox.classList.contains('bomb')) {
@@ -70,6 +68,7 @@ function placeBomb() {
     let box = boxEl[i]
     box.setAttribute('class', shuffle[i]);
     }
+    return
 }
 
 function countNum() {
@@ -136,18 +135,20 @@ function checkNearBox(box, index) {
 
 
 function gameOver() {
-  gameStatus = false;
+  gameStatus = true;
 
   boxEl.forEach(box => {
     if (box.classList.contains('bomb')) {
-      box.style.backgroundImage = 'url(image/bomb.png)'
+      box.style.backgroundImage ='url(image/bomb.png)'
     }
   })
 }
 
+
 function clearBoard() {
   boxEl.forEach(box => {box.setAttribute('data', '0')});
   boxEl.forEach(box => box.innerText = '');
+  boxEl.forEach(box => box.style.backgroundImage = 'none')
 }
 
 function renderMessage() {
@@ -169,7 +170,7 @@ function render() {
 function init() {
   bombs = 10;
   width = 7;
-  gameStatus = null;
+  gameStatus = false;
 
   clearBoard();
   render();
