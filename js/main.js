@@ -43,7 +43,7 @@ function handleClick(e) {
   if(clickedBox.classList.contains('check')  || clickedBox.classList.contains('flag')) return;
   
   if (clickedBox.classList.contains('bomb')) {
-    gameStatus = false;
+    gameOver();
   } else if(clickedBox.classList.contains('good')) {
     countNum();
     
@@ -58,7 +58,6 @@ function handleClick(e) {
     return clickedBox.classList.add('check');
   } 
   
-  gameStatus = winOrLose();
   render();
 }
 
@@ -166,19 +165,21 @@ function winOrLose() {
 
 function win() {
   findbomb = 0;
+  
   for (let i =0; i < boxEl.length; i++) {
     if(boxEl[i].classList.contains('flag') && boxEl[i].classList.contains('bomb')) {
-      findbomb ++
-      console.log(findbomb);
+      console.log(boxEl[i].classList.contains('flag'));
+      return findbomb ++
     }
     if (findbomb === bombs) {
       console.log('A')
-      gameStatus = true;
+      return gameStatus = true;
     }
   }
 }
 
 function gameOver() {
+  gameStatus = false;
   boxEl.forEach(box => {
     if (box.classList.contains('bomb')) {
       return box.style.backgroundImage ='url(image/bomb.png)'
@@ -197,7 +198,7 @@ function renderMessage() {
   if (gameStatus === null) {
     msgEl.textContent = `Let's Find the Bomb!`
   } else if (gameStatus === true) {
-    return msgEl.textContent = `You win`
+    msgEl.textContent = `You win`
   } else {
     return msgEl.textContent = `You Lose`;
   }
