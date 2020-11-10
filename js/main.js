@@ -22,31 +22,29 @@ const msgEl = document.getElementById('msg');
 boxEl.forEach(box => {box.addEventListener('click', handleClick)})
 boxEl.forEach(box => {box.addEventListener('contextmenu', rightClick)})
 
-document.getElementById('replay')
-  .addEventListener('click', init);
+document.getElementById('replay').addEventListener('click', init);
 
 /*----- functions -----*/
 init();
 
 function rightClick(e) {
   e.preventDefault();
+  if(gameStatus === true || gameStatus === fasle) return;
   
   const clickedBox = e.target
   
   mayBeBomb(clickedBox);
-  
   render();
 }
 
 function handleClick(e) {
   const clickedBox = e.target;
-  console.log(e.target);
   boxClick(clickedBox)
   render();
 }
 
 function boxClick(clickedBox) {
-    const currentId = clickedBox.id
+    const currentId = clickedBox.id;
 
     if(gameStatus === true || gameStatus === false) return;
     if(clickedBox.classList.contains('check')  || clickedBox.classList.contains('flag')) return;
@@ -64,7 +62,6 @@ function boxClick(clickedBox) {
       }else {
       clickedBox.classList.add('check');
       checkNearBox(clickedBox, currentId)
-      console.log('finally')
     }
   }
 }
@@ -140,15 +137,18 @@ function checkNearBox(clickedBox, currentId) {
 function mayBeBomb(clickedBox) {
   if (!clickedBox.classList.contains('check') && (flag < bombs)) {
     if (!clickedBox.classList.contains('flag')) {
-      clickedBox.classList.add('flag')
-      clickedBox.innerHTML = '🏳️‍🌈'
-      flag ++
+      clickedBox.classList.add('flag');
+      clickedBox.innerHTML = '🏳️‍🌈';
+      flag ++;
       return win();
     } else {
-      clickedBox.classList.remove('flag')
-      clickedBox.innerHTML = ''
-      return flag --
+      clickedBox.classList.remove('flag');
+      clickedBox.innerHTML = '';
+      return flag --;
     }
+  }
+  if (gameStatus === fasle) {
+    clickedBox.innerHTML = '';
   }
 }
 
@@ -170,7 +170,8 @@ function gameOver() {
   gameStatus = false;
   boxEl.forEach(box => {
     if (box.classList.contains('bomb')) {
-      return box.style.backgroundImage ='url(image/bomb.png)'
+      box.style.backgroundColor = 'var(--basic-blue)'
+      return box.innerHTML = '💣'
     }
   })
 }
