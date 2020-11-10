@@ -29,8 +29,8 @@ init();
 
 function rightClick(e) {
   e.preventDefault();
-  if(gameStatus === false) return
-  const clickedBox = e.target
+  if(gameStatus === false) return;
+  const clickedBox = e.target;
   
   mayBeBomb(clickedBox);
   render();
@@ -38,7 +38,7 @@ function rightClick(e) {
 
 function handleClick(e) {
   const clickedBox = e.target;
-  boxClick(clickedBox)
+  boxClick(clickedBox);
   render();
 }
 
@@ -57,10 +57,10 @@ function boxClick(clickedBox) {
       if (num != 0) {
         clickedBox.classList.add('check');
         clickedBox.innerHTML = num;
-        return
+        return;
       }else {
       clickedBox.classList.add('check');
-      checkNearBox(clickedBox, currentId)
+      checkNearBox(clickedBox, currentId);
     }
   }
 }
@@ -69,7 +69,7 @@ function placeBomb() {
   let shuffle = gameArray.sort(() => Math.random() - 0.5);
 
   for(let i = 0; i < boxEl.length; i++){
-    let box = boxEl[i]
+    let box = boxEl[i];
     box.setAttribute('class', shuffle[i]);
     }
 
@@ -100,35 +100,35 @@ function checkNearBox(clickedBox, currentId) {
 
 
   if (currentId > 0 && !leftBox) {
-    const newTarget = boxEl[parseInt(currentId) - 1]
+    const newTarget = boxEl[parseInt(currentId) - 1];
     boxClick(newTarget);
   }
   if (currentId > 6 && !rightBox) {
-    const newTarget = boxEl[parseInt(currentId) + 1 - width]
+    const newTarget = boxEl[parseInt(currentId) + 1 - width];
     boxClick(newTarget);
   }
   if (currentId > 7) {
-    const newTarget = boxEl[parseInt(currentId) - width]
+    const newTarget = boxEl[parseInt(currentId) - width];
     boxClick(newTarget);
   }
   if (currentId > 8 && !leftBox) {
-    const newTarget = boxEl[parseInt(currentId) - 1 - width]
+    const newTarget = boxEl[parseInt(currentId) - 1 - width];
     boxClick(newTarget);
   }
   if (currentId < 48 && !rightBox) {
-    const newTarget = boxEl[parseInt(currentId) + 1]
+    const newTarget = boxEl[parseInt(currentId) + 1];
     boxClick(newTarget);
   }
   if (currentId < 42 && !leftBox) {
-    const newTarget = boxEl[parseInt(currentId) - 1 + width]
+    const newTarget = boxEl[parseInt(currentId) - 1 + width];
     boxClick(newTarget);
   }
   if (currentId < 41 && !rightBox) {
-    const newTarget = boxEl[parseInt(currentId) + 1 + width]
+    const newTarget = boxEl[parseInt(currentId) + 1 + width];
     boxClick(newTarget);
   }
   if (currentId < 40) {
-    const newTarget = boxEl[parseInt(currentId) + width]
+    const newTarget = boxEl[parseInt(currentId) + width];
     boxClick(newTarget);
   }
 }
@@ -156,7 +156,7 @@ function win() {
   
   for (let i =0; i < boxEl.length; i++) {
     if(boxEl[i].classList.contains('flag') && boxEl[i].classList.contains('bomb')) {
-      findbomb ++
+      findbomb ++;
     }
     if (findbomb === bombs) {
       return gameStatus = true;
@@ -169,8 +169,8 @@ function gameOver() {
   gameStatus = false;
   boxEl.forEach(box => {
     if (box.classList.contains('bomb')) {
-      box.style.backgroundColor = 'var(--basic-blue)'
-      return box.style.backgroundImage = 'url(image/bomb.png)'
+      box.style.backgroundColor = 'var(--basic-blue)';
+      return box.style.backgroundImage = 'url(image/bomb.png)';
     }
   })
 }
@@ -178,14 +178,14 @@ function gameOver() {
 function clearBoard() {
   boxEl.forEach(box => {box.setAttribute('data', '0')});
   boxEl.forEach(box => box.innerText = '');
-  boxEl.forEach(box => box.style.backgroundImage = 'none')
+  boxEl.forEach(box => box.style.backgroundImage = 'none');
 }
 
 function renderMessage() {
   if (gameStatus === null) {
-    msgEl.textContent = `Let's Find the Bomb!`
+    msgEl.textContent = `Let's Find the Bomb!`;
   } else if (gameStatus === true) {
-    msgEl.textContent = `You win`
+    msgEl.textContent = `You win`;
   } else {
     return msgEl.textContent = `You Lose`;
   }
