@@ -28,8 +28,10 @@ function rightClick(e) {
   const box = Array.from(boxEl);
   const index = box.indexOf(e.target);
   const clickedBox = boxEl[index];
+  
   mayBeBomb(clickedBox);
   
+  render();
 }
 
 function handleClick(e) {
@@ -39,7 +41,7 @@ function handleClick(e) {
 
   console.log(index);
 
-  if(gameStatus) return;
+  if(gameStatus === true || gameStatus === false) return;
   if(clickedBox.classList.contains('check')  || clickedBox.classList.contains('flag')) return;
   
   if (clickedBox.classList.contains('bomb')) {
@@ -139,27 +141,17 @@ function checkNearBox(box, index) {
 }
 
 function mayBeBomb(clickedBox) {
-  console.log(clickedBox)
-  console.log('flag');
   if (!clickedBox.classList.contains('check') && (flag < bombs)) {
     if (!clickedBox.classList.contains('flag')) {
       clickedBox.classList.add('flag')
       clickedBox.innerHTML = '🏳️‍🌈'
       flag ++
-      win();
+      return win();
     } else {
       clickedBox.classList.remove('flag')
       clickedBox.innerHTML = ''
-      flag --
+      return flag --
     }
-  }
-}
-
-function winOrLose() {
-  if(gameStatus === false) {
-    gameOver();
-  } else {
-    win();
   }
 }
 
@@ -168,14 +160,13 @@ function win() {
   
   for (let i =0; i < boxEl.length; i++) {
     if(boxEl[i].classList.contains('flag') && boxEl[i].classList.contains('bomb')) {
-      console.log(boxEl[i].classList.contains('flag'));
-      return findbomb ++
+      findbomb ++
     }
     if (findbomb === bombs) {
-      console.log('A')
       return gameStatus = true;
     }
   }
+  
 }
 
 function gameOver() {
@@ -205,8 +196,6 @@ function renderMessage() {
 }
 
 function render() {
-
-  
   renderMessage();
 }
 
