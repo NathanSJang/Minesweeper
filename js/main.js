@@ -29,7 +29,7 @@ init();
 
 function rightClick(e) {
   e.preventDefault();
-  if(gameStatus === fasle) return
+  if(gameStatus === false) return
   const clickedBox = e.target
   
   mayBeBomb(clickedBox);
