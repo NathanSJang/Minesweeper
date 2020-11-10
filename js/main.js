@@ -1,5 +1,11 @@
 /*----- constants -----*/
-
+const gameArray = [
+  "good", "good", "good", "good", "good", "good", "good", "good", "good", 
+  "good", "good", "good", "good", "good", "good", "good", "good", "good", "good", 
+  "good", "good", "good", "good", "good", "good", "good", "good", "good", "good", 
+  "good", "good", "good", "good", "good", "good", "good", "good", "good", "good", 
+  "bomb", "bomb", "bomb", "bomb", "bomb", "bomb", "bomb", "bomb", "bomb", "bomb"
+]
 
 /*----- app's state (variables) -----*/
 let bombs; // bomb#
@@ -63,12 +69,7 @@ function handleClick(e) {
   render();
 }
 
-
 function placeBomb() {
-  let leng = boxEl.length 
-  let bombArray = Array(bombs).fill('bomb');
-  let goodArray = Array(leng- bombs).fill('good');
-  let gameArray = goodArray.concat(bombArray);
   let shuffle = gameArray.sort(() => Math.random() - 0.5);
 
   for(let i = 0; i < boxEl.length; i++){
@@ -99,7 +100,7 @@ function countNum() {
 
 function checkNearBox(box, index) {
   const leftBox = (index % width === 0);
-  const rightBox = (index %width === (width - 1));
+  const rightBox = (index % width === (width - 1));
 
   function checkNum(el) {
     let num = el.getAttribute('data');
@@ -178,7 +179,6 @@ function gameOver() {
   })
 }
 
-
 function clearBoard() {
   boxEl.forEach(box => {box.setAttribute('data', '0')});
   boxEl.forEach(box => box.innerText = '');
@@ -207,5 +207,6 @@ function init() {
 
   placeBomb();
   clearBoard();
+
   render();
 }

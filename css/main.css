@@ -30,9 +30,6 @@ header {
   letter-spacing: 2vmin;
 }
 
-main {
-}
-
 section {
   flex-wrap: wrap;
   margin: 4vmin;
@@ -50,16 +47,34 @@ section {
 .board > div {
   height: 70px;
   width: 70px;
-  background-image: center;
-  background-position: center;
+  border: 1px solid black;
+}
+
+.board > div:hover {
+  background-color: var(--bg-light);
+  cursor: pointer;
 }
 
 .bomb {
+  height: 6vmin;
+  width: 6vmin;
+  background-image: center;
+  background-size: cover;
   background-color: var(--basic-blue);
 }
 
 .good {
   background-color: var(--basic-red);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 3vmin;
+}
+
+.flag {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 #msg {
@@ -78,7 +93,7 @@ section {
   font-size: 2vmin;
   font-weight: bold;
   padding: 2vmin;
-  margin-top: 4vmin;
+  margin-top: 0vmin;
   border: 0.3vmin solid black;
   background-color: var(--bg-light);
   color: var(--font-bg);
@@ -93,5 +108,9 @@ section {
 }
 
 .check {
-  background-color: white;
+  background-color: var(--bg-light);
+}
+
+h2 {
+  margin-top: 0vmin;
 }
