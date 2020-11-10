@@ -169,7 +169,7 @@ function gameOver() {
   gameStatus = false;
   boxEl.forEach(box => {
     if (box.classList.contains('bomb')) {
-      box.style.backgroundColor = 'var(--basic-blue)';
+      box.classList.add('check')
       return box.style.backgroundImage = 'url(image/bomb.png)';
     }
   })
