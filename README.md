@@ -1,2 +1,3 @@
 # Minesweeper
+
 JS Minesweeper

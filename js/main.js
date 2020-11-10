@@ -30,10 +30,8 @@ init();
 
 function rightClick(e) {
   e.preventDefault();
-
-  const box = Array.from(boxEl);
-  const index = box.indexOf(e.target);
-  const clickedBox = boxEl[index];
+  
+  const clickedBox = e.target
   
   mayBeBomb(clickedBox);
   
@@ -41,32 +39,34 @@ function rightClick(e) {
 }
 
 function handleClick(e) {
-  const box = Array.from(boxEl);
-  const index = box.indexOf(e.target);
-  const clickedBox = boxEl[index];
-
-  console.log(index);
-
-  if(gameStatus === true || gameStatus === false) return;
-  if(clickedBox.classList.contains('check')  || clickedBox.classList.contains('flag')) return;
-  
-  if (clickedBox.classList.contains('bomb')) {
-    gameOver();
-  } else if(clickedBox.classList.contains('good')) {
-    countNum();
-    
-    let num = clickedBox.getAttribute('data');
-    if (num != 0) {
-      clickedBox.classList.add('check');
-      clickedBox.innerHTML = num;
-    } else {
-      clickedBox.classList.add('check');
-      checkNearBox(box, index);
-    }
-    return clickedBox.classList.add('check');
-  } 
-  
+  const clickedBox = e.target;
+  console.log(e.target);
+  boxClick(clickedBox)
   render();
+}
+
+function boxClick(clickedBox) {
+    const currentId = clickedBox.id
+
+    if(gameStatus === true || gameStatus === false) return;
+    if(clickedBox.classList.contains('check')  || clickedBox.classList.contains('flag')) return;
+    
+    if (clickedBox.classList.contains('bomb')) {
+      gameOver();
+    } else if(clickedBox.classList.contains('good')) {
+      countNum();
+      
+      let num = clickedBox.getAttribute('data');
+      if (num != 0) {
+        clickedBox.classList.add('check');
+        clickedBox.innerHTML = num;
+        return
+      }else {
+      clickedBox.classList.add('check');
+      checkNearBox(clickedBox, currentId)
+      console.log('finally')
+    }
+  }
 }
 
 function placeBomb() {
@@ -98,46 +98,42 @@ function countNum() {
   } 
 }
 
-function checkNearBox(box, index) {
-  const leftBox = (index % width === 0);
-  const rightBox = (index % width === (width - 1));
+function checkNearBox(clickedBox, currentId) {
+  const leftBox = (currentId % width === 0);
+  const rightBox = (currentId % width === (width - 1));
 
-  function checkNum(el) {
-    let num = el.getAttribute('data');
-    el.innerHTML = num;
-    return el.classList.add('check');
+
+  if (currentId > 0 && !leftBox) {
+    const newTarget = boxEl[parseInt(currentId) - 1]
+    boxClick(newTarget);
   }
-  if (index > 0 && !leftBox) {
-    const newTarget = boxEl[index - 1]
-    checkNum(newTarget);
+  if (currentId > 6 && !rightBox) {
+    const newTarget = boxEl[parseInt(currentId) + 1 - width]
+    boxClick(newTarget);
   }
-  if (index > 6 && !rightBox) {
-    const newTarget = boxEl[index + 1 -width]
-    checkNum(newTarget);
+  if (currentId > 7) {
+    const newTarget = boxEl[parseInt(currentId) - width]
+    boxClick(newTarget);
   }
-  if (index > 7) {
-    const newTarget = boxEl[index - width]
-    checkNum(newTarget);
+  if (currentId > 8 && !leftBox) {
+    const newTarget = boxEl[parseInt(currentId) - 1 - width]
+    boxClick(newTarget);
   }
-  if (index > 8 && !leftBox) {
-    const newTarget = boxEl[index - 1 - width]
-    checkNum(newTarget);
+  if (currentId < 48 && !rightBox) {
+    const newTarget = boxEl[parseInt(currentId) + 1]
+    boxClick(newTarget);
   }
-  if (index < 48 && !rightBox) {
-    const newTarget = boxEl[index + 1]
-    checkNum(newTarget);
+  if (currentId < 42 && !leftBox) {
+    const newTarget = boxEl[parseInt(currentId) - 1 + width]
+    boxClick(newTarget);
   }
-  if (index < 42 && !leftBox) {
-    const newTarget = boxEl[index - 1 + width]
-    checkNum(newTarget);
+  if (currentId < 41 && !rightBox) {
+    const newTarget = boxEl[parseInt(currentId) + 1 + width]
+    boxClick(newTarget);
   }
-  if (index < 41 && !rightBox) {
-    const newTarget = boxEl[index + 1 + width]
-    checkNum(newTarget);
-  }
-  if (index < 40 && !rightBox) {
-    const newTarget = boxEl[index + width]
-    checkNum(newTarget);
+  if (currentId < 40) {
+    const newTarget = boxEl[parseInt(currentId) + width]
+    boxClick(newTarget);
   }
 }
 
