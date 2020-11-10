@@ -13,7 +13,7 @@ const msgEl = document.getElementById('msg');
 
 /*----- event listeners -----*/
 boxEl.forEach(box => {box.addEventListener('click', handleClick)})
-// boxEl.forEach(box => {box.addEventListener('contextmenu', rightClick)})
+boxEl.forEach(box => {box.addEventListener('contextmenu', rightClick)})
 
 document.getElementById('replay')
   .addEventListener('click', init);
@@ -58,6 +58,7 @@ function handleClick(e) {
 
 
 function placeBomb() {
+  if(gameStatus === false) return
   let leng = boxEl.length 
   let bombArray = Array(bombs).fill('bomb');
   let goodArray = Array(leng- bombs).fill('good');
@@ -68,7 +69,7 @@ function placeBomb() {
     let box = boxEl[i]
     box.setAttribute('class', shuffle[i]);
     }
-    return
+
 }
 
 function countNum() {
@@ -135,11 +136,11 @@ function checkNearBox(box, index) {
 
 
 function gameOver() {
-  gameStatus = true;
+  gameStatus = false;
 
   boxEl.forEach(box => {
     if (box.classList.contains('bomb')) {
-      box.style.backgroundImage ='url(image/bomb.png)'
+      return box.style.backgroundImage ='url(image/bomb.png)'
     }
   })
 }
@@ -163,15 +164,15 @@ function renderMessage() {
 
 function render() {
 
-  placeBomb();
-  renderMessage();
+renderMessage();
 }
 
 function init() {
   bombs = 10;
   width = 7;
-  gameStatus = false;
+  gameStatus = null;
 
+  placeBomb();
   clearBoard();
   render();
 }
