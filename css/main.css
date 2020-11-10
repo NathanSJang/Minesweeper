@@ -32,7 +32,7 @@ header {
 
 section {
   flex-wrap: wrap;
-  margin: 4vmin;
+  margin: 1vmin 4vmin;
   background-color: black;
 }
 
@@ -63,10 +63,6 @@ section {
   display: flex;
   justify-content: center;
   align-items: center;
-}
-
-.bomb .check {
-  background-color: var(--basic-blue);
 }
 
 .good {
@@ -117,5 +113,6 @@ section {
 }
 
 h2 {
-  margin-top: 0vmin;
+  margin-top: 2vmin;
+  color: var(--font-bg);
 }

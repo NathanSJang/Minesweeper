@@ -29,8 +29,7 @@ init();
 
 function rightClick(e) {
   e.preventDefault();
-  if(gameStatus === true || gameStatus === fasle) return;
-  
+  if(gameStatus === fasle) return
   const clickedBox = e.target
   
   mayBeBomb(clickedBox);
@@ -171,7 +170,7 @@ function gameOver() {
   boxEl.forEach(box => {
     if (box.classList.contains('bomb')) {
       box.style.backgroundColor = 'var(--basic-blue)'
-      return box.innerHTML = '💣'
+      return box.style.backgroundImage = 'url(image/bomb.png)'
     }
   })
 }
