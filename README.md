@@ -4,12 +4,12 @@
 
 The rule of the Minesweeper is simple, the number on a box shows the number of mines near boxes and you have to flag all the mine.
 
-####Controls
+#### Controls
 
 - `Left-click` - reveals a block
 - `right-click` - place a flag or remove flag
 
-####List of the technlolgies
+#### List of the technlolgies
 
 - JavaScript, HTML, CSS
 
@@ -22,7 +22,7 @@ The rule of the Minesweeper is simple, the number on a box shows the number of m
 
 <p align="center"><a href="https://grey1287.github.io/Minesweeper/">MineSweeper</p></a>
 
-####Next step
+#### Next step
 
 - Add Easy and Hard mode
 - Set timer
