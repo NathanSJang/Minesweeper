@@ -20,7 +20,7 @@ The rule of the Minesweeper is simple, the number on a box shows the number of m
 - You have to mark all the bombs to win.
 - Click the MineSweeper and enjoy the game
 
-<p align="center"><a href="https://grey1287.github.io/Minesweeper/">MineSweeper</p>
+<p align="center"><a href="https://grey1287.github.io/Minesweeper/">MineSweeper</p></a>
 
 ####Next step
 
