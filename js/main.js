@@ -20,7 +20,6 @@ const msgEl = document.getElementById('msg');
 /*----- event listeners -----*/
 boxEl.forEach(box => {box.addEventListener('click', handleClick)})
 boxEl.forEach(box => {box.addEventListener('contextmenu', rightClick)})
-
 document.getElementById('replay').addEventListener('click', init);
 
 /*----- functions -----*/
@@ -28,16 +27,18 @@ init();
 
 function rightClick(e) {
   e.preventDefault();
+
   if(gameStatus === false) return;
   const clickedBox = e.target;
-  
   mayBeBomb(clickedBox);
+  
   render();
 }
 
 function handleClick(e) {
   const clickedBox = e.target;
   boxClick(clickedBox);
+
   render();
 }
 
