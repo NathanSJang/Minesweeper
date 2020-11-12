@@ -80,7 +80,7 @@ section {
 
 #msg {
   font-size: 4vmin;
-  color: var(--basic-red);
+  color: var(--font-bg);
 }
 
 .flex-ctr {
@@ -110,9 +110,4 @@ section {
 
 .check {
   background-color: var(--basic-blue);
-}
-
-h2 {
-  margin-top: 2vmin;
-  color: var(--font-bg);
 }
