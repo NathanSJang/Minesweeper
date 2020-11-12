@@ -18,8 +18,8 @@ const boxEl = document.querySelectorAll('.board > div');
 const msgEl = document.getElementById('msg');
 
 /*----- event listeners -----*/
-boxEl.forEach(box => {box.addEventListener('click', handleClick)})
-boxEl.forEach(box => {box.addEventListener('contextmenu', rightClick)})
+boxEl.forEach(box => {box.addEventListener('click', handleClick)});
+boxEl.forEach(box => {box.addEventListener('contextmenu', rightClick)});
 document.getElementById('replay').addEventListener('click', init);
 
 /*----- functions -----*/
@@ -42,6 +42,7 @@ function handleClick(e) {
   render();
 }
 
+// recursion funtion // call checkNearBox()
 function boxClick(clickedBox) {
     const currentId = clickedBox.id;
 
@@ -59,12 +60,13 @@ function boxClick(clickedBox) {
         clickedBox.innerHTML = num;
         return;
       }else {
-      clickedBox.classList.add('check');
-      checkNearBox(clickedBox, currentId);
+        clickedBox.classList.add('check');
+        checkNearBox(clickedBox, currentId);
     }
   }
 }
 
+// ramdomly place mine in the grid// add classList ('bomb', 'good')// use Math.random
 function placeBomb() {
   let shuffle = gameArray.sort(() => Math.random() - 0.5);
 
@@ -75,6 +77,7 @@ function placeBomb() {
 
 }
 
+// write code to display the number of nearby mine// ? (check near chell has calss 'bomb' and show the num) 
 function countNum() {
   for(let i =0; i < boxEl.length; i++) {
     let countNum =0;
@@ -94,6 +97,7 @@ function countNum() {
   } 
 }
 
+// recursion // checking 8 direction and call boxClick()
 function checkNearBox(clickedBox, currentId) {
   const leftBox = (currentId % width === 0);
   const rightBox = (currentId % width === (width - 1));
@@ -132,7 +136,7 @@ function checkNearBox(clickedBox, currentId) {
     boxClick(newTarget);
   }
 }
-
+// contextmenu // check flas clsss and show flag
 function mayBeBomb(clickedBox) {
   if (!clickedBox.classList.contains('check') && (flag < bombs)) {
     if (!clickedBox.classList.contains('flag')) {
@@ -169,18 +173,19 @@ function gameOver() {
   gameStatus = false;
   boxEl.forEach(box => {
     if (box.classList.contains('bomb')) {
-      box.classList.add('check')
+      box.classList.add('check');
       return box.style.backgroundImage = 'url(image/bomb.png)';
     }
   })
 }
-
+// remove all the data and text on the board
 function clearBoard() {
   boxEl.forEach(box => {box.setAttribute('data', '0')});
   boxEl.forEach(box => box.innerText = '');
   boxEl.forEach(box => box.style.backgroundImage = 'none');
 }
 
+// render msg// check bomb and win or lose
 function renderMessage() {
   if (gameStatus === null) {
     msgEl.textContent = `Let's Find the Bomb!`;
