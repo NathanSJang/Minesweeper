@@ -14,7 +14,6 @@ let width;
 let flag;
 
 /*----- cached element references -----*/
-const board = document.querySelector('.board');
 const boxEl = document.querySelectorAll('.board > div');
 const msgEl = document.getElementById('msg');
 
